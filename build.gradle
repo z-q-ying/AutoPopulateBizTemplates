@@ -30,7 +30,7 @@ pmd {
             "category/java/codestyle.xml"
             //"java-basic",
             //"java-braces",
-            //"java-strings",
+            //"java-strings"
     ]
 }
 
