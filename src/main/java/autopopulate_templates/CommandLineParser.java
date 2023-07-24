@@ -1,5 +1,6 @@
 package autopopulate_templates;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,13 +18,16 @@ public class CommandLineParser {
   private Boolean hasEmailOption;
   private Boolean hasLetterOption;
   private Map<String, String> options;
+  private ArrayList<Option> optionsList;
 
   public CommandLineParser(String[] args) throws InvalidArgumentsException {
     options = new HashMap<>();
+    optionsList = new ArrayList<>();
     hasEmailOption = false;
     hasLetterOption = false;
     this.parseArguments(args);
     this.validateArguments();
+    this.populateOptionList();
   }
 
   private void parseArguments(String[] args) throws InvalidArgumentsException {
@@ -82,7 +86,7 @@ public class CommandLineParser {
 
   // TODO Check if we still needs to implement all getters, equals, toString if we dont need it
 
-  // TODO To handle the case where --email-template is NOT provided but we call the respective function
+  // TODO What is the best way to handle the case where --email-template is NOT provided but we call the respective function
 
   public Boolean hasEmailOption() {
     return hasEmailOption;
@@ -106,6 +110,20 @@ public class CommandLineParser {
 
   public String getCsvFileDir() {
     return options.get(OPTION_CSV_FILE);
+  }
+
+  // Populate optionList
+  private void populateOptionList() {
+    if (hasEmailOption) {
+      optionsList.add(new Option(OPTION_EMAIL, options.get(OPTION_EMAIL_TEMPLATE), options.get(OPTION_OUTPUT_DIR), options.get(OPTION_CSV_FILE)));
+    }
+    if (hasLetterOption){
+      optionsList.add(new Option(OPTION_LETTER, options.get(OPTION_LETTER_TEMPLATE), options.get(OPTION_OUTPUT_DIR), options.get(OPTION_CSV_FILE)));
+    }
+  }
+
+  public ArrayList<Option> getOptionList(){
+    return optionsList;
   }
 }
 

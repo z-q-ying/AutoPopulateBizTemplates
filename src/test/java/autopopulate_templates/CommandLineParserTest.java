@@ -2,6 +2,7 @@ package autopopulate_templates;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -146,5 +147,23 @@ class CommandLineParserTest {
   void getCsvFile() {
     assertEquals("customer.csv", commandLineParser1.getCsvFileDir());
     assertEquals("customer.csv", commandLineParser2.getCsvFileDir());
+  }
+
+  @Test
+  void testOptionLIst() {
+    ArrayList<Option> optionList = commandLineParser1.getOptionList();
+    assertEquals(2, optionList.size());
+
+    assertEquals("--email", optionList.get(0).getOption());
+    assertEquals("email-template.txt", optionList.get(0).getTemplate());
+    assertEquals("./output", optionList.get(0).getOutputDir());
+    assertEquals("customer.csv", optionList.get(0).getCsvFile());
+
+    assertEquals("--letter", optionList.get(1).getOption());
+    assertEquals("letter-template.txt", optionList.get(1).getTemplate());
+    assertEquals("./output", optionList.get(1).getOutputDir());
+    assertEquals("customer.csv", optionList.get(1).getCsvFile());
+
+
   }
 }
