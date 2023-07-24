@@ -7,13 +7,13 @@ import java.util.Map;
 public class CommandLineParser {
 
   // TODO From coding aspect, what is the difference between email and letter option?
-  private static final String OPTION_EMAIL = "--email";
+  protected static final String OPTION_EMAIL = "--email";
   private static final String OPTION_EMAIL_TEMPLATE = "--email-template"; // --email-template <path/to/file>
-  private static final String OPTION_LETTER = "--letter";
+  protected static final String OPTION_LETTER = "--letter";
   private static final String OPTION_LETTER_TEMPLATE = "--letter-template"; // -letter-template <path/to/file
   private static final String OPTION_OUTPUT_DIR = "--output-dir"; // --output-dir <path/to/folder>
   private static final String OPTION_CSV_FILE = "--csv-file"; // --csv-file <path/to/file>
-  private static final String DEFAULT_OUTPUT_DIR = "./src/main/resources/output";
+  private static final String DEFAULT_OUTPUT_DIR = "./src/main/resources/";
 
   private Boolean hasEmailOption;
   private Boolean hasLetterOption;

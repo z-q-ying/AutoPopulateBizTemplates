@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 public class TemplateProcessor {
 
+  private String option;
   private String template;
   private String outputDir;
   private List<Map<String, String>> csvData;
@@ -20,12 +21,18 @@ public class TemplateProcessor {
   private static final String PLACEHOLDER_PATTERN = "\\[\\[(\\w+)\\]\\]";
   private static final String SUBSTRING_LEFT = "[[";
   private static final String SUBSTRING_RIGHT = "]]";
+  private static final String SUBSTRING_OPTION = "--";
   private static final Integer LEN_OF_SUBSTRING = 2;
 
-  public TemplateProcessor(List<Map<String, String>> csvData, String template, String outputDir) {
+  public TemplateProcessor(String option, List<Map<String, String>> csvData, String template, String outputDir) {
+    this.option = processOption(option);
     this.template = template;
     this.outputDir = outputDir;
     this.csvData = csvData;
+  }
+
+  private String processOption(String option) {
+    return option.replace(SUBSTRING_OPTION, "").toLowerCase();
   }
 
   public void generateOutput() throws IOException {
@@ -33,7 +40,7 @@ public class TemplateProcessor {
     Integer fileNameCounter = 1;
     for (Map<String, String> row : this.csvData) {
       String output = replacePlaceholders(template, row);
-      String fileName = this.outputDir + Integer.toString(fileNameCounter) + ".txt"; // no duplicate
+      String fileName = this.outputDir + this.option + "-" + Integer.toString(fileNameCounter) + ".txt"; // no duplicate
       writeToFile(fileName, output);
       fileNameCounter++;
     }

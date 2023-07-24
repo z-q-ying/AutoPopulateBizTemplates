@@ -21,7 +21,7 @@ class TemplateProcessorTest {
     String outputDir = "./src/main/resources/test-output";
     csvProcessor = new CsvFileProcessor(filePath);
     csvDatabase = csvProcessor.getCsvData();
-    testTemplateProcessor = new TemplateProcessor(csvDatabase, templateDir, outputDir);
+    testTemplateProcessor = new TemplateProcessor("--email", csvDatabase, templateDir, outputDir);
   }
 
   @Test

@@ -16,6 +16,8 @@ public class CsvFileProcessor {
 
   //private static final String CSV_PATTERN = "\"([^\"]+)\""; // recognize a non-empty string in ""
   private static final String CSV_PATTERN = "\"([^\"]*)\"|(?<=,|^)([^,]*)(?=,|$)"; // recognize a non-empty string in ""
+  private static final String EMAIL_FILE_IDENTIFIER = "email";
+  private static final String LETTER_FILE_IDENTIFIER = "letter";
 
   private List<Map<String, String>> csvData;
 

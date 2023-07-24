@@ -22,7 +22,7 @@ public class Main {
         CsvFileProcessor csvFileProcessor = new CsvFileProcessor(csvFile);
 
         // read and process the template
-        TemplateProcessor templateProcessor = new TemplateProcessor(csvFileProcessor.getCsvData(), templateDir, outputDir);
+        TemplateProcessor templateProcessor = new TemplateProcessor(option.getOption(), csvFileProcessor.getCsvData(), templateDir, outputDir);
         templateProcessor.generateOutput();
 
         // populate the output
