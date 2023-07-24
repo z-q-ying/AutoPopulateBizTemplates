@@ -53,7 +53,7 @@ public class CsvFileProcessor {
     } catch (FileNotFoundException e) {
       throw new FileNotFoundException("File not found: " + csvFilePath);
     } catch (IOException e) {
-      throw new IOException("Error reading file: " + csvFilePath);
+      throw new IOException("Error reading the csv file: " + csvFilePath);
     }
   }
 

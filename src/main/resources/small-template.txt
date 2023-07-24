@@ -1,0 +1,1 @@
+Hi there! I am [[first_name]] [[last_name]]. I am working at [[company_name]]. If you have any question, please reach me at [[phone1]] OR [[email]]. Thanks!

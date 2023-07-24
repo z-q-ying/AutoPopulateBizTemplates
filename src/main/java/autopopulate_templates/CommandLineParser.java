@@ -17,7 +17,7 @@ public class CommandLineParser {
 
   private Boolean hasEmailOption;
   private Boolean hasLetterOption;
-  private Map<String, String> options;
+  private Map<String, String> options; // TODO Discontinued
   private ArrayList<Option> optionsList;
 
   public CommandLineParser(String[] args) throws InvalidArgumentsException {
@@ -86,7 +86,7 @@ public class CommandLineParser {
 
   // TODO Check if we still needs to implement all getters, equals, toString if we dont need it
 
-  // TODO What is the best way to handle the case where --email-template is NOT provided but we call the respective function
+  // TODO What is the best way to handle the case where --email-template is NOT provided but we call the respective function?
 
   public Boolean hasEmailOption() {
     return hasEmailOption;
