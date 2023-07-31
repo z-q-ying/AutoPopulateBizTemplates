@@ -2,6 +2,8 @@ package autopopulate_templates;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,8 +13,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvFileProcessorTest {
+  private static String fileSeparator = File.separator;
 
-  private String filePath = "./src/main/resources/csv-processor-test.csv";
+  private static String FILE_PATH = "." + fileSeparator + "src" + fileSeparator + "test"
+       + fileSeparator + "resources" + fileSeparator + "csv"
+      + "-processor-test.csv";
+  private static String EXCEPTION_FILE_PATH1 = "." + fileSeparator + "src" + fileSeparator + "test"
+      + fileSeparator + "resources" + fileSeparator + "csv"
+      + "-processor-test-exception1.csv";
+  private static String EXCEPTION_FILE_PATH2 = "." + fileSeparator + "src" + fileSeparator + "test"
+      + fileSeparator + "resources" + fileSeparator + "csv"
+      + "-processor-test-exceptions.csv";
+  private static String EXCEPTION_FILE_PATH3 = "." + fileSeparator + "src" + fileSeparator + "test"
+      + fileSeparator + "resources" + fileSeparator + "csv"
+      + "-processor-test-exception2.csv";
+  private static String EXCEPTION_FILE_PATH4 = "." + fileSeparator + "src" + fileSeparator + "test"
+      + fileSeparator + "resources" + fileSeparator + "csv"
+      + "-processor-test-exception3.csv";
   private CsvFileProcessor csvFileProcessor;
 
   Map<String, String> expectedResult1;
@@ -21,8 +38,8 @@ class CsvFileProcessorTest {
 
   @BeforeEach
   void setUp() throws IOException {
-    filePath = "./src/main/resources/csv-processor-test.csv";
-    csvFileProcessor = new CsvFileProcessor(filePath);
+
+    csvFileProcessor = new CsvFileProcessor(FILE_PATH);
 
     expectedResult1 = new HashMap<>();
     expectedResult1.put("first_name", "James");
@@ -50,6 +67,32 @@ class CsvFileProcessorTest {
     expectedResult3.put("state", "NJ");
     expectedResult3.put("phone1", "856-636-8749");
     expectedResult3.put("email", "art@venere.org");
+  }
+
+  @Test
+  public void emptyFile() {
+    assertThrows(IOException.class, () -> {
+      new CsvFileProcessor(EXCEPTION_FILE_PATH1);
+    });
+  }
+  @Test
+  public void noFile() {
+    assertThrows(FileNotFoundException.class, () -> {
+      new CsvFileProcessor(EXCEPTION_FILE_PATH2);
+    });
+  }
+
+  @Test
+  public void numberOfValuesNotMatch() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      new CsvFileProcessor(EXCEPTION_FILE_PATH3);
+    });
+  }
+  @Test
+  public void numberOfValuesNotMatch2() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      new CsvFileProcessor(EXCEPTION_FILE_PATH4);
+    });
   }
 
   @Test
